@@ -2,8 +2,8 @@ let budget = "Ваш бюджет на месяц?",
 	nameShop = "Название вашего магазина";
 
 	mainList = {
-		budgetShop: 1000,
-		nameShop: "Super Store",
+		budgetShop: budget,
+		nameShop: nameShop,
 		shopGoods: [],
 		employers: {
 			principal: "Директор",
