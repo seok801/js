@@ -1,5 +1,5 @@
-let budget = "Ваш бюджет на месяц?",
-	nameShop = "Название вашего магазина";
+let budget = prompt("Ваш бюджет на месяц?"),
+	nameShop = prompt("Название вашего магазина");
 
 	mainList = {
 		budgetShop: budget,
@@ -12,9 +12,11 @@ let budget = "Ваш бюджет на месяц?",
 		},
 		open: false
 	}
+    
+    mainList.budgetShop = budget;
 
-let sum = prompt(budget, ""),
-	name = prompt(nameShop, "");
+
+
 
 let questionOne = prompt("Какой тип товаров будем продавать?", ""),
 	questionTwo = prompt("Какой тип товаров будем продавать?", ""),
@@ -24,7 +26,8 @@ let questionOne = prompt("Какой тип товаров будем прода
 	mainList.shopGoods[1] = questionTwo;
 	mainList.shopGoods[2] = questionThree;
 
+    console.log(mainList);
 	console.log(mainList.shopGoods);
-	console.log("Ваш бюджет на месяц составляет сумму " + sum);
-	console.log("Название вашего магазина " + name);
-	document.write("Бюджет пользователя на один день составляет " + "<strong>" + sum/30 + "</strong>");
+	console.log("Ваш бюджет на месяц составляет сумму " + budget);
+	console.log("Название вашего магазина " + nameShop);
+	document.write("Бюджет пользователя на один день составляет " + "<strong>" + budget/30 + "</strong>");
