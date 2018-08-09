@@ -11,7 +11,7 @@ let budget = prompt("Ваш бюджет на месяц?"),
 	}
 
 
-/* for (let i = 0; i < 5; i++) {
+for (let i = 0; i < 5; i++) {
 
 	let a = prompt("Какой тип товаров будем продавать");
 
