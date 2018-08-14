@@ -89,6 +89,7 @@ let	mainList = {
 		chooseShopItems: function chooseShopItems(){
 			let items = prompt("Перечислите через запятую Ваши товары", "");
 
+
 			while ((typeof(items)) != 'string' || !isNaN(items) || items == "" || items == null) {
                 items = prompt("Перечислите через запятую Ваши товары", "");
     	}
@@ -105,9 +106,22 @@ let	mainList = {
 
 				//mainList.shopItems.push(prompt("Подождите, еще ", ""));
 				mainList.shopItems.sort();
-			}
+
+				  document.write("<strong>У нас вы можете купить:</strong><br>");
+               	  mainList.shopItems.forEach(function(item, i, shopItems){
+
+                  document.write((++i) + " " + item + "<br>");
+                  console.log(mainList.shopItems);
+
+               });
+
+                   document.write("<strong>Наш магазин включает в себя:</strong><br> ");
+               for (let key in mainList) {
+               		document.write(key + "<br>");
+               }
 				
 	}
+}
 
 
 
@@ -118,6 +132,4 @@ mainList.systemDiscount();
 mainList.hireEmployers();
 */
 mainList.chooseShopItems();
-
-
-console.log(mainList);
+//console.log(mainList);
