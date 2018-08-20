@@ -30,13 +30,17 @@ let open = document.getElementById('open-btn'),
     mainInfo = document.querySelector('.main-info'),
     hireEmployersItem = document.querySelectorAll('.hire-employers-item');
 
- console.log(countDiscountBtn);
+//Отключаем все кнопки магазина
+   goodsItemBtn.disabled = true;
+   countBudgetBtn.disabled = true;
+   countDiscountBtn.disabled = true;
+   hireEmployersBtn.disabled = true;
 
 let money,
     nameShop,
     price;
 
-
+//Открытие магазина
 open.addEventListener('click', () => {
 
     money = prompt("Ваш бюджет на месяц?", "");
@@ -52,6 +56,7 @@ open.addEventListener('click', () => {
 });
 
 
+//Введите категории товаров
 goodsItemBtn.addEventListener('click', () => {
 
     for (let i = 0; i < goodsItem.length; i++) {
@@ -69,7 +74,7 @@ goodsItemBtn.addEventListener('click', () => {
     }
 });
 
-
+//Введите продукты через запятую
 chooseItem.addEventListener('change', () => {
 
     let items = chooseItem.value;
@@ -83,26 +88,22 @@ chooseItem.addEventListener('change', () => {
            
 });
 
+//Сколько сейчас времени?
 timeValue.addEventListener('change', () => {
     let time = timeValue.value;
 
      if (time < 0) {
                         console.log('Такого не может быть');
                         mainList.open = false;
-                        countDiscountBtn.disabled = true;
-                        goodsItemBtn.disabled = true;
-                        countBudgetBtn.disabled = true;
-                        hireEmployersBtn.disabled = true;
-
-                    } else if (time > 8 && time < 20) {
+                    } else if (time > 8 && time < 20 && money != "" && money != null) {
                         console.log('Время работать!');
                         mainList.open = true;
+                        goodsItemBtn.disabled = false;
+                        countBudgetBtn.disabled = false;
+                        countDiscountBtn.disabled = false;
+                        hireEmployersBtn.disabled = false;
                     } else if (time < 24) {
                         console.log("Уже слишком поздно!");
-                        countDiscountBtn.disabled = true;
-                        goodsItemBtn.disabled = true;
-                        countBudgetBtn.disabled = true;
-                        hireEmployersBtn.disabled = true;
                         mainList.open = false;
                     } else {
                         console.log("В сутках только 24 часа!");
@@ -115,53 +116,102 @@ timeValue.addEventListener('change', () => {
     }
 });
 
+//Расчет дневного бюджета
 countBudgetBtn.addEventListener('click', () => {
     count_budget_value.value = money / 30;
 });
 
+//Получить скидку 20%
 countDiscountBtn.addEventListener('click', () => {
 
-    if(mainList.discount == true){
+if(mainList.discount == true){
         count_discount_value.value = (money/100)*80;
     }
 
-     if(mainList.discount == true) {
+if(mainList.discount == true) {
         discount_value.style.backgroundColor = 'green';
-        let mydiv = document.createElement("div");
-            mydiv.classList.add("mydiv");
-            mainInfo.appendChild(mydiv);
-            mydiv.textContent = "Поздравляем! Вы получили отличную скидку!";
+    let mydiv = document.createElement("div");
+        mydiv.classList.add("mydiv");
+        mainInfo.appendChild(mydiv);
+        mydiv.textContent = "Поздравляем! Вы получили отличную скидку!";
     } else {
         discount_value.style.backgroundColor = 'red';
     }
 
 });
 
+//Запрет ввода чего либо в поле "Расчет дневного бюджета"
 count_budget_value.addEventListener('keyup', () => {
     a = count_budget_value.value.replace(/\d/g, "");
    
-   if(a*1 + 0  !=  count_budget_value.value && count_budget_value.value != "number"){
+if(a*1 + 0  !=  count_budget_value.value && count_budget_value.value != "number"){
         count_budget_value.value = a.substring(0, a.length-1);
             
     }
-
-   console.log(a.length);
 }); 
 
 
       
-
+//Имена сотрудников
 hireEmployersBtn.addEventListener('click', () => {
 
-    for (let i = 0; i < hireEmployersItem.length; i++) {
+for(let i = 0; i < hireEmployersItem.length; i++) {
                 
-        let nameEmployers = hireEmployersItem[i].value;
-            mainList.employers[i] = nameEmployers;
-             employers_value.textContent += mainList.employers[i] + ", ";
+    let nameEmployers = hireEmployersItem[i].value;
+        mainList.employers[i] = nameEmployers;
+        employers_value.textContent += mainList.employers[i] + ", ";
     }
 });
 
-goods_item[0].addEventListener('change', () => { if (goods_item[0].value != "") { goods_btn.disabled = false; } else { goods_btn.disabled = true; } });
+
+//В цикле получаем все поля "Введите категории товаров" и цепляем событие для инпутов - change
+for(let i = 0; i < goodsItem.length; i++){
+
+    let inputDisable = goodsItem[i];
+        inputDisable.addEventListener("change", function(){
+
+    if(inputDisable.value != '') {
+
+        goodsItemBtn.disabled = false;
+        hireEmployersBtn.disabled = false;
+
+     }
+    if(isNaN(money) || money == "" || money == null){
+        countBudgetBtn.disabled = true;
+        countDiscountBtn.disabled = true;
+    } else {
+        countBudgetBtn.disabled = false;
+        countDiscountBtn.disabled = false;
+} 
+
+ });
+}
+
+
+//В цикле получаем все поля "Имена сотрудников" и цепляем событие для инпутов - change
+for(let i = 0; i < hireEmployersItem.length; i++){
+
+    let inputDisable = hireEmployersItem[i];
+        inputDisable.addEventListener("change", function(){
+
+    if(inputDisable.value != '') {
+        goodsItemBtn.disabled = false;
+        hireEmployersBtn.disabled = false;
+     }
+
+    if(isNaN(money) || money == "" || money == null){
+        countBudgetBtn.disabled = true;
+        countDiscountBtn.disabled = true;
+
+    } else {
+        countBudgetBtn.disabled = false;
+        countDiscountBtn.disabled = false;
+} 
+
+ });
+}
+
+//Если при открытии магазина не введено число, то кнопки расчета и акции отключены
 
 
 let mainList = {
