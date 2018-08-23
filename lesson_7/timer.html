@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Таймер</title>
+	<script>
+window.addEventListener('DOMContentLoaded', function(){
+
+function NewMyClock() {
+    let newTime = new Date();
+    let hour = newTime.getHours();
+    let minute = newTime.getMinutes();
+    let second = newTime.getSeconds();
+ 
+    if (hour < 10) hour = "0" + hour;
+    if (minute < 10) minute  = "0" + minute;
+    if (second < 10) second  = "0" + second;
+    
+    document.getElementById("newTime").innerHTML = `${hour} : ${minute} : ${second}`; 
+  }
+
+setInterval(NewMyClock, 1000);
+
+});
+	</script>
+</head>
+<body>
+	<p style="font-weight:bold;">Текущее время сайта: <span id="newTime"></span></p>
+</body>
+</html>
