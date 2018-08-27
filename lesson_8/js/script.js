@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', function(){
 
-
 	let tab = document.getElementsByClassName('info-header-tab'),
 	    tabContent = document.getElementsByClassName('info-tabcontent'),
 	    info = document.getElementsByClassName('info-header')[0];
@@ -38,8 +37,9 @@ info.addEventListener('click', function(event){
 		}
 });
 
+
 //Timer
-let deadline = '2018-08-24';
+let deadline = '2018-08-28';
 
 	function getTimeRemaining(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()),
@@ -83,11 +83,10 @@ let deadline = '2018-08-24';
 		}
 
 		updateClock();
-		let timeInterval = setInterval(updateClock, 1000);
+		var timeInterval = setInterval(updateClock, 1000);
 
 	}
 
 setClock('timer', deadline);
-
 
 });
