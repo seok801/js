@@ -11,4 +11,10 @@ window.addEventListener('DOMContentLoaded', function(){
    }
 
 console.log(JSON.parse(JSON.stringify(options)));
+
+
+
+  elem.outerHTML = "Прощай, жестокий мир!"
+  alert(elem.outerHTML);
+
 });
